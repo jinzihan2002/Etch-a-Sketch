@@ -21,9 +21,21 @@ body {
 }
 
 #sidebar {
-    width: 200px;
+    width: 150px;
     height: 400px;
     border: 2px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.reset {
+    width: 100px;
+    height: 20px;
+    margin: 4px;
+    border: 2px solid gray;
+    border-radius: 3px;
 }
 
 #container {
