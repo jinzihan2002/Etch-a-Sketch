@@ -10,8 +10,12 @@
 <body>
     <div id="body">
         <div id="sidebar">
-            <button id="clear" class="reset">Clear</button>
-            <button class="reset">Resize</button>
+            <button class="reset" id="clear">Clear</button>
+            <div id="resize-items">
+                <button class="reset" id="resize">Resize</button>
+                <input id="length-input" type="range" min="1" max="100" value="50" step="1">
+                <p id="length-label">Length: <output id="length-output"></output></p>
+            </div>
         </div>
         <div id="container">
             
