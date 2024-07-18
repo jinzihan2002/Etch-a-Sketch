@@ -70,7 +70,3 @@ body {
     flex: 1;
     border: 1px solid #DDD;
 }
-
-.square.colored {
-    background-color: gray;
-}

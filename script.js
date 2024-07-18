@@ -1,5 +1,6 @@
 let gridLength;
 let isDragging = false;
+let randColor = true;
 
 const container = document.querySelector("#container");
 const lengthInput = document.querySelector("#length-input");
@@ -15,18 +16,29 @@ function loadGrid() {
             const square = document.createElement("div");
             square.setAttribute("class", "square");
 
-            square.addEventListener("mousedown", () => {
-                square.setAttribute("class", "square colored");
+            square.addEventListener("mousedown", (e) => {
+                changeColor(e.target);
             });
-            square.addEventListener("mouseover", () => {
+            square.addEventListener("mouseover", (e) => {
                 if (isDragging) {
-                    square.className = "square colored";
+                    changeColor(e.target);
                 }
             });
 
             row.appendChild(square);
         }
         container.appendChild(row);
+    }
+}
+
+function randomColors() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function changeColor(element) {
+    if (!element.classList.contains("colored")) {
+        element.style.backgroundColor = randColor ? randomColors() : "#808080";
+        element.setAttribute("class", "square colored");
     }
 }
 
