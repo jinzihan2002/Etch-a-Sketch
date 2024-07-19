@@ -1,6 +1,6 @@
 let gridLength;
 let isDragging = false;
-let randColor = true;
+let setColor = "gray";
 
 const container = document.querySelector("#container");
 const lengthInput = document.querySelector("#length-input");
@@ -37,9 +37,22 @@ function randomColors() {
 
 function changeColor(element) {
     if (!element.classList.contains("colored")) {
-        element.style.backgroundColor = randColor ? randomColors() : "#808080";
+        if (setColor === "gray") {
+            element.style.backgroundColor = "#808080";
+        } else if (setColor === "random") {
+            element.style.backgroundColor = randomColors();
+        } else {
+            return;
+        }
         element.setAttribute("class", "square colored");
+    } else if (setColor === "erase") {
+        removeColor(element);
     }
+}
+
+function removeColor(element) {
+    element.removeAttribute("style");
+    element.setAttribute("class", "square");
 }
 
 window.onload = function() {
@@ -63,9 +76,7 @@ document.body.addEventListener("mouseup", () => {
 const btnClear = document.querySelector("#clear");
 btnClear.addEventListener("click", () => {
     const squares = document.querySelectorAll(".square.colored");
-    squares.forEach(square => {
-        square.setAttribute("class", "square");
-    });
+    squares.forEach(square => removeColor(square));
 });
 
 const btnResize = document.querySelector("#resize");
@@ -76,4 +87,11 @@ btnResize.addEventListener("click", () => {
 lengthInput.addEventListener("input", (e) => {
     gridLength = e.target.value;
     lengthOutput.textContent = gridLength;
+});
+
+const radioButtons = document.querySelector("#color-field");
+radioButtons.addEventListener("click", (e) => {
+    if (e.target.type === "radio") {
+        setColor = e.target.value;
+    }
 });
